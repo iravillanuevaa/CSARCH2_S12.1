@@ -4,23 +4,23 @@ import java.util.*;
 
 class LRUCache {
 
-	Set<Integer> cache_list;
+	Set<String> cache_list;
     int capacity;
-    LinkedList<Integer> result;
+    LinkedList<String> result;
     public static int hit;
     public static int miss;
 
 	public LRUCache(int capacity){
-		this.cache_list = new LinkedHashSet<Integer>(capacity);
+		this.cache_list = new LinkedHashSet<String>(capacity);
         this.capacity = capacity;
-        this.result = new LinkedList<Integer>(); 
+        this.result = new LinkedList<String>(); 
 	}
 
 	// This function returns false if key is not
 	// present in cache. Else it moves the key to
 	// front by first removing it and then adding
 	// it, and returns true.
-	public boolean get(int key){
+	public boolean get(String key){
 		if (!cache_list.contains(key)){
             miss++;
             return false;
@@ -33,7 +33,7 @@ class LRUCache {
 	}
 
 	/* Refers key x with in the LRU cache */
-	public void refer(int key){	 
+	public void refer(String key){	 
 		if (get(key) == false){
             put(key);
         }
@@ -46,16 +46,16 @@ class LRUCache {
         // The descendingIterator() method of java.util.LinkedList
         // class is used to return an iterator over the elements
         // in this LinkedList in reverse sequential order
-        Iterator<Integer> itr = result.iterator(); 
+        Iterator<String> itr = result.iterator(); 
         //System.out.println(result);
 
         while (itr.hasNext())
             System.out.print(itr.next() + " ");
 	}
 	
-	public void put(int key){
+	public void put(String key){
         if (cache_list.size() == capacity) {
-                int firstKey = cache_list.iterator().next();
+                String firstKey = cache_list.iterator().next();
                 int index = result.indexOf(firstKey);
 
                 result.remove(index);
@@ -90,9 +90,10 @@ class LRUCache {
         LRUCache cache = new LRUCache(block);
         
         //get values from user
+        String data = scan.nextLine();
         for (int i = 0 ; i < values; i++){
             System.out.print("Enter value: ");
-            int data = scan.nextInt();
+            data = scan.nextLine();
             cache.refer(data);
         }
         scan.close();
