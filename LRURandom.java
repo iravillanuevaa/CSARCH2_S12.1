@@ -11,6 +11,7 @@ public class LRURandom {
     LinkedList<Integer> result;
     public static int hit;
     public static int miss;
+    public static int i;
 
 	public LRURandom(int capacity){
 		this.cache_list = new LinkedHashSet<Integer>(capacity);
@@ -92,10 +93,16 @@ public class LRURandom {
     
 
         Random rand = new Random(); 
-       
+        
         System.out.println("Value generated: ");
-        for (int i = 0 ; i < values; i++){
+        for (i = 0 ; i < values; i++){
             int rand_int = rand.nextInt(100); 
+            int repeat = rand.nextInt(3); 
+            if(repeat == 1){
+            cache.refer(rand_int);  
+            System.out.print(rand_int + " ");
+            i++;
+            }
             System.out.print(rand_int + " ");
             cache.refer(rand_int);
         }
