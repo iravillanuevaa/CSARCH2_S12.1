@@ -5,10 +5,6 @@
  */
 package csarch2simulationproj;
 
-/**
- *
- * @author Ira Villanueva
- */
 public class Menu extends javax.swing.JFrame {
 
     /**
