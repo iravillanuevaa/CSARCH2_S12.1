@@ -138,7 +138,7 @@ public class Simpleton extends javax.swing.JFrame {
             }
         });
 
-        label13.setText("Values");
+        label13.setText("MM Block Sequence");
 
         Reset.setBackground(new java.awt.Color(204, 0, 0));
         Reset.setForeground(new java.awt.Color(255, 255, 255));
