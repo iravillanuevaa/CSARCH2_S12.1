@@ -1,0 +1,5 @@
+add rows https://1bestcsharp.blogspot.com/2015/05/java-jtable-add-delete-update-row.html
+
+To create JAR:
+
+jar cfm app.jar Manifest.txt *.class backend/*.class
