@@ -125,7 +125,7 @@ public class LRUSequential_num_times {
                 data_val.concat(Character.toString(c));
             }
             else if(memory_seq.charAt(i)==32){
-                tmpkey=Integer.Integer.valueOf(data_val);
+                tmpkey=Integer.valueOf(data_val);
                 cache.refer(tmpkey);
                 data_val="";
                 seqnum++;
