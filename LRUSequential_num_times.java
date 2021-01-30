@@ -118,37 +118,39 @@ public class LRUSequential_num_times {
         int tmpkey;
         data_val="";
         seqnum=0;
-        for (i = 0 ; i < memory_seq.length(); i++){
-            if(memory_seq[i]!=32)
+        for (int i = 0 ; i < memory_seq.length(); i++){
+            if(memory_seq.charAt(i)!=32)
             {
-                data_val.concat(memory_seq[i]);
+                char c=memory_seq.charAt(i);
+                data_val.concat(Character.toString(c));
             }
-            else if(memory_seq[i]==32){
-                tmpkey=Integer.parseInt(data_val);
+            else if(memory_seq.charAt(i)==32){
+                tmpkey=Integer.Integer.valueOf(data_val);
                 cache.refer(tmpkey);
                 data_val="";
                 seqnum++;
             }
         }
-        tmpkey=Integer.parseInt(data_val);
+        tmpkey=Integer.valueOf(data_val);
         cache.refer(tmpkey);
         data_val="";
         seqnum++;
 //read data sequence where rand_int is the data blk variable
-        for (i = 0 ; i < (seqnum*times-1); i++){
-            for (j = 0 ; j < memory_seq.length(); j++){
-                if(memory_seq[i]!=32)
+        for (int i = 0 ; i < (seqnum*times-1); i++){
+            for (int j = 0 ; j < memory_seq.length(); j++){
+                if(memory_seq.charAt(j)!=32)
                 {
-                    data_val.concat(memory_seq[i]);
+                    char c=memory_seq.charAt(j);
+                    data_val.concat(Character.toString(c));
                 }
-                else if(memory_seq[i]==32){
-                    tmpkey=Integer.parseInt(data_val);
+                else if(memory_seq.charAt(j)==32){
+                    tmpkey=Integer.valueOf(data_val);
                     cache.refer(tmpkey);
                     data_val="";
                 }
             }
             data_val="";
-            tmpkey=Integer.parseInt(data_val);
+            tmpkey=Integer.valueOf(data_val);
             cache.refer(tmpkey);
             data_val="";
         }
@@ -177,8 +179,8 @@ public class LRUSequential_num_times {
         int misspenalty_lt = cache_access + memory_access;
 
         //Average access time
-        float average_access = ((hit_rate*cache_access) + (miss_rate*misspenalty));
-
+        float average_access_nlt = ((hit_rate*cache_access) + (miss_rate*misspenalty_nlt));
+        float average_access_lt = ((hit_rate*cache_access) + (miss_rate*misspenalty_lt));
         //Total access time
         int total_acc = ((hit*word*cache_access) + ((cache_access+memory_access)*word*miss) + (miss*cache_access));
 
@@ -187,7 +189,8 @@ public class LRUSequential_num_times {
         System.out.println("Miss rate: " + miss + "/" + values);
         System.out.println("Miss Penalty (load through): " + misspenalty_lt);
         System.out.println("Miss Penalty (non-load through): " + misspenalty_nlt);
-        System.out.println("Average memory access time: " + average_access);
+        System.out.println("Average memory access time lt: " + average_access_lt);
+        System.out.println("Average memory access time nlt: " + average_access_nlt);
         System.out.println("Total memory access time: " + total_acc);
         System.out.print("Cache memory: ");
 //display cache or memory contents	
