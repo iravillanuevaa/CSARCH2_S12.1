@@ -383,6 +383,8 @@ public class Simpleton extends javax.swing.JFrame {
         Average.setText("");
         Total.setText(" ");
         Final.setText("");
+        simulation.setText(" ");
+        simulation.setText("");
     }//GEN-LAST:event_ResetActionPerformed
 
     private void CacheMissActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CacheMissActionPerformed
