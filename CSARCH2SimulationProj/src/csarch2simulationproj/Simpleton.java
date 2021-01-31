@@ -25,7 +25,7 @@ public class Simpleton extends javax.swing.JFrame {
 
         label1 = new java.awt.Label();
         label2 = new java.awt.Label();
-        CacheBlock = new java.awt.TextField();
+        BlockSize = new java.awt.TextField();
         label3 = new java.awt.Label();
         MemSize = new java.awt.TextField();
         label4 = new java.awt.Label();
@@ -60,7 +60,6 @@ public class Simpleton extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         simulation = new javax.swing.JTextArea();
-        Val_Type = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Full Associative/LRU (S12.1) - Simpleton");
@@ -70,9 +69,9 @@ public class Simpleton extends javax.swing.JFrame {
         label1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         label1.setText("Full Associative/LRU");
 
-        label2.setText("Cache Block");
+        label2.setText("Block Size");
 
-        CacheBlock.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        BlockSize.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         label3.setText("Cache Memory Size");
 
@@ -173,13 +172,6 @@ public class Simpleton extends javax.swing.JFrame {
         simulation.setRows(5);
         jScrollPane2.setViewportView(simulation);
 
-        Val_Type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Block", "Address" }));
-        Val_Type.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Val_TypeActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,12 +207,7 @@ public class Simpleton extends javax.swing.JFrame {
                                         .addComponent(CacheSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(CType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(CacheBlock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(Values, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Val_Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(BlockSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addGap(0, 0, Short.MAX_VALUE))
@@ -229,7 +216,10 @@ public class Simpleton extends javax.swing.JFrame {
                                         .addComponent(Reset)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                                         .addComponent(Simulate)
-                                        .addGap(27, 27, 27)))))
+                                        .addGap(27, 27, 27))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(Values, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGap(32, 32, 32)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -313,7 +303,7 @@ public class Simpleton extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CacheBlock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BlockSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -338,8 +328,7 @@ public class Simpleton extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Values, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Val_Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(label13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -368,8 +357,8 @@ public class Simpleton extends javax.swing.JFrame {
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
         // TODO add your handling code here:
-        CacheBlock.setText(" ");
-        CacheBlock.setText("");
+        BlockSize.setText(" ");
+        BlockSize.setText("");
         CacheSize.setText(" ");
         CacheSize.setText("");
         CacheTime.setText(" ");
@@ -406,13 +395,9 @@ public class Simpleton extends javax.swing.JFrame {
         m.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_MenuActionPerformed
-
-    private void Val_TypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Val_TypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Val_TypeActionPerformed
     
     private boolean checkPositive(){
-       int cache_block = Integer.parseInt(CacheBlock.getText());
+       int cache_block = Integer.parseInt(BlockSize.getText());
        int cache_size = Integer.parseInt(CacheSize.getText());
        int mem_size = Integer.parseInt(MemSize.getText());
        int cache_time = Integer.parseInt(CacheTime.getText());
@@ -425,27 +410,58 @@ public class Simpleton extends javax.swing.JFrame {
        }
     }
     
-   
-    
     private void simulateLRU(){
-        if(CacheBlock.getText().length() > 0 && CacheSize.getText().length() > 0 && MemSize.getText().length() > 0 && CacheTime.getText().length() > 0 ){
+        if(BlockSize.getText().length() > 0 && CacheSize.getText().length() > 0 && MemSize.getText().length() > 0 && CacheTime.getText().length() > 0 ){
             if(checkPositive() == true){
-                 int cache_block = Integer.parseInt(CacheBlock.getText());
-                 LRUCache = new Simpleton_LRU(cache_block, this);
+                 int block_size = Integer.parseInt(BlockSize.getText());
                  int cache_msize = Integer.parseInt(CacheSize.getText());
                  int main_msize = Integer.parseInt(MemSize.getText());
-                
+                 
+                 LRUCache = new Simpleton_LRU(cache_msize, this);
+                 
                  String val = Values.getText();
                  String[] values = val.trim().split("\\s*,\\s*");
                  
                  String c_type = (String) CType.getSelectedItem();   
                  if(c_type.equals("Word")){
-                     cache_msize = cache_msize / cache_block;
+                     /*Convert cache word to block*/
+                    int flag = 0;
+                    int temp = 0;
+                    int i = 1;
+                    
+                        while (flag == 0){
+                            temp = (int) Math.pow(2, i);
+                            System.out.println("Temp: " + temp);
+                            if(temp >= cache_msize) {
+                                flag = 1;
+                            }
+                            i++;
+                        }
+                        /*i = exponent of cache memory word*/
+                        i--;
+                        System.out.println("i: " + i);
+                        int x = 1; 
+                        flag = 0;
+                        temp = 0;
+                        while (flag == 0){
+                            temp = (int) Math.pow(2, i);
+                            if(temp >= cache_msize) {
+                                flag = 1;
+                            }
+                            x++; /*x = exponent of block size*/
+                        }
+                    /*divide exponent of cache memory size  (word) / exponent of block size (word)*/
+                    int expo = i/x;
+                    System.out.println("Expo: " + expo);
+                    /*block = 2^expo*/
+                    cache_msize = (int) Math.pow(2,expo);
+                    
+                    System.out.println("Block: " + cache_msize);
                  }
                  
                  String m_type = (String) MType.getSelectedItem();   
                  if(m_type.equals("Word")){
-                     main_msize = main_msize / cache_block;
+                     
                  }
                  
                  simulation.append("CACHE SIMULATION: " + "\n");
@@ -467,8 +483,7 @@ public class Simpleton extends javax.swing.JFrame {
                  //Miss penalty (non-load thru)
                  int cache_access = Integer.parseInt(CacheTime.getText());
                  int memory_access = Integer.parseInt(MemoryTime.getText());
-                 int cache_size = Integer.parseInt(CacheSize.getText());
-                 int misspenalty = cache_access + cache_size*memory_access + cache_access;
+                 int misspenalty = cache_access + block_size*memory_access + cache_access;
                  String mp = Integer.toString(misspenalty);
                  MissPenalty.setText(mp);
 
@@ -478,7 +493,7 @@ public class Simpleton extends javax.swing.JFrame {
                  Average.setText(avg);
 
                  //Total access time
-                 int total_access = ( (LRUCache.hit*cache_size*cache_access) + ((cache_access+memory_access)*cache_size*LRUCache.miss) + (LRUCache.miss*cache_access) );
+                 int total_access = ( (LRUCache.hit*block_size*cache_access) + ((cache_access+memory_access)*block_size*LRUCache.miss) + (LRUCache.miss*cache_access) );
                  String total = Integer.toString(total_access);
                  Total.setText(total);
 
@@ -537,8 +552,8 @@ public class Simpleton extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.TextField Average;
+    private java.awt.TextField BlockSize;
     private javax.swing.JComboBox<String> CType;
-    private java.awt.TextField CacheBlock;
     private java.awt.TextField CacheHit;
     private java.awt.TextField CacheMiss;
     private java.awt.TextField CacheSize;
@@ -552,7 +567,6 @@ public class Simpleton extends javax.swing.JFrame {
     private javax.swing.JButton Reset;
     private javax.swing.JButton Simulate;
     private java.awt.TextField Total;
-    private javax.swing.JComboBox<String> Val_Type;
     private java.awt.TextField Values;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

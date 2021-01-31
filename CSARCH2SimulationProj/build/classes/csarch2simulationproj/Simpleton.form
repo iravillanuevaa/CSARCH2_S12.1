@@ -62,13 +62,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="CType" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="CacheBlock" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                      <Component id="Values" max="32767" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="Val_Type" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="BlockSize" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -79,6 +73,10 @@
                                       <EmptySpace pref="31" max="32767" attributes="0"/>
                                       <Component id="Simulate" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                      <Component id="Values" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -188,7 +186,7 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="label2" min="-2" max="-2" attributes="0"/>
-                          <Component id="CacheBlock" min="-2" max="-2" attributes="0"/>
+                          <Component id="BlockSize" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -222,7 +220,6 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="Values" min="-2" max="-2" attributes="0"/>
                           <Component id="label13" min="-2" max="-2" attributes="0"/>
-                          <Component id="Val_Type" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="14" max="-2" attributes="0"/>
@@ -253,10 +250,10 @@
     </Component>
     <Component class="java.awt.Label" name="label2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cache Block"/>
+        <Property name="text" type="java.lang.String" value="Block Size"/>
       </Properties>
     </Component>
-    <Component class="java.awt.TextField" name="CacheBlock">
+    <Component class="java.awt.TextField" name="BlockSize">
       <Properties>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Text Cursor"/>
@@ -493,21 +490,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="Val_Type">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
-            <StringItem index="0" value="Block"/>
-            <StringItem index="1" value="Address"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Val_TypeActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
   </SubComponents>
 </Form>
