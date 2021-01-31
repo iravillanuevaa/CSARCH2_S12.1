@@ -5,6 +5,10 @@
  */
 package csarch2simulationproj;
 
+/**
+ *
+ * @author Ira Villanueva
+ */
 public class Menu extends javax.swing.JFrame {
 
     /**
@@ -101,6 +105,10 @@ public class Menu extends javax.swing.JFrame {
 
     private void RandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RandomActionPerformed
         // TODO add your handling code here:
+        Random r = new Random();
+        r.setLocationRelativeTo(null);
+        r.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_RandomActionPerformed
 
     private void SequentialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SequentialActionPerformed

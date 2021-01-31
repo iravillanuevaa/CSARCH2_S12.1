@@ -7,21 +7,20 @@ package csarch2simulationproj;
 
 import java.util.*;
 
-public class Simpleton_LRU {
+public class Random_LRU extends Random{
     
     Set<String> cache_list;
     int capacity;
     LinkedList<String> result;
     int hit;
     int miss;
-    Simpleton simpleton;
+    Random random;
     
-    public Simpleton_LRU(int capacity, Simpleton simpleton){
+    public Random_LRU(int capacity, Random random){
 	this.cache_list = new LinkedHashSet<String>(capacity);
         this.capacity = capacity;
         this.result = new LinkedList<String>(); 
-        this.simpleton = simpleton;
-        
+        this.random = random;
     }
     
      public boolean get(String key){
@@ -32,8 +31,8 @@ public class Simpleton_LRU {
             cache_list.remove(key);
             cache_list.add(key);
             hit++;
-            simpleton.simulation.append("\n" + "Value: " + key + " | Hit: " + hit + " | Miss: " + miss + "\n");
-            simpleton.simulation.append("Cache: " + result + "\n");
+            random.simulation.append("\n" + "Value: " + key + " | Hit: " + hit + " | Miss: " + miss + "\n");
+            random.simulation.append("Cache: " + result + "\n");
             return true;
         }
     }
@@ -42,21 +41,21 @@ public class Simpleton_LRU {
         if (cache_list.size() == capacity) {
             String firstKey = cache_list.iterator().next();
             int index = result.indexOf(firstKey);
-
-            simpleton.simulation.append("\n" + "Value: " + key + " | Hit: " + hit + " | Miss: " + miss + "\n");
-            simpleton.simulation.append("Cache: " + result + "\n");
+            
+            random.simulation.append("\n" + "Value: " + key + " | Hit: " + hit + " | Miss: " + miss + "\n");
+            random.simulation.append("Cache: " + result + "\n");
             result.remove(index);
-            simpleton.simulation.append("Cache: " + result + "\n");
+            random.simulation.append("Cache: " + result + "\n");
             result.add(index, key);
-            simpleton.simulation.append("Cache: " + result + "\n");
+            random.simulation.append("Cache: " + result + "\n");
             cache_list.remove(firstKey);
             cache_list.add(key);
                                 
         } else{
             cache_list.add(key);
             result.add(key);
-            simpleton.simulation.append("\n" + "Value: " + key + " | Hit: " + hit + " | Miss: " + miss + "\n");
-            simpleton.simulation.append("Cache: " + result + "\n");
+            random.simulation.append("\n" + "Value: " + key + " | Hit: " + hit + " | Miss: " + miss + "\n");
+            random.simulation.append("Cache: " + result + "\n");
         }
     }
     
@@ -64,5 +63,9 @@ public class Simpleton_LRU {
 	if (get(key) == false){
             put(key);
         }
+    }
+    
+    public LinkedList<String> result(){
+        return result;
     }
 }
