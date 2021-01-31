@@ -49,8 +49,8 @@ public class Random extends javax.swing.JFrame {
         Final = new java.awt.TextField();
         CacheMiss = new java.awt.TextField();
         jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        CType = new javax.swing.JComboBox<>();
+        MType = new javax.swing.JComboBox<>();
         label13 = new java.awt.Label();
         CacheTime = new java.awt.TextField();
         Reset = new javax.swing.JButton();
@@ -63,6 +63,7 @@ public class Random extends javax.swing.JFrame {
         Generate = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         simulation = new javax.swing.JTextArea();
+        MType1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Full Associative/LRU (S12.1) - Random");
@@ -130,17 +131,17 @@ public class Random extends javax.swing.JFrame {
 
         jButton2.setText("Save to .txt");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Word", "Block" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        CType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Block", "Word" }));
+        CType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                CTypeActionPerformed(evt);
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Word", "Block" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        MType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Block", "Word" }));
+        MType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                MTypeActionPerformed(evt);
             }
         });
 
@@ -183,6 +184,13 @@ public class Random extends javax.swing.JFrame {
         simulation.setRows(5);
         jScrollPane3.setViewportView(simulation);
 
+        MType1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Block", "Address" }));
+        MType1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MType1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,36 +205,42 @@ public class Random extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(Generate))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Reset)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(label14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(label15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(label13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addComponent(Menu)))
+                                .addGap(9, 9, 9)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(CacheTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(MemSize, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(CacheSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(Values, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(MemoryTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(CacheBlock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Reset)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(Simulate)
-                                        .addGap(49, 49, 49)))))
+                                        .addGap(35, 35, 35))
+                                    .addComponent(CacheTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(MemSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(MType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(CacheSize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(CType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(MemoryTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(CacheBlock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(Values, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(MType1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel1))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -265,8 +279,6 @@ public class Random extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Menu)
-                        .addGap(152, 152, 152)
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -274,11 +286,9 @@ public class Random extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Menu)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,14 +333,14 @@ public class Random extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CacheSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(MType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -343,7 +353,8 @@ public class Random extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Values, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Values, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(MType1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(5, 5, 5))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(MemSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -352,7 +363,8 @@ public class Random extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Reset)
-                            .addComponent(Simulate))
+                            .addComponent(Simulate)
+                            .addComponent(Menu))
                         .addGap(19, 19, 19))))
         );
 
@@ -364,13 +376,13 @@ public class Random extends javax.swing.JFrame {
         simulateLRU();
     }//GEN-LAST:event_SimulateActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void CTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CTypeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_CTypeActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void MTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MTypeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_MTypeActionPerformed
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
         // TODO add your handling code here:
@@ -417,7 +429,25 @@ public class Random extends javax.swing.JFrame {
         // TODO add your handling code here:
         generateValues();
     }//GEN-LAST:event_GenerateActionPerformed
+
+    private void MType1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MType1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MType1ActionPerformed
         
+    private boolean checkPositive(){
+       int cache_block = Integer.parseInt(CacheBlock.getText());
+       int cache_size = Integer.parseInt(CacheSize.getText());
+       int mem_size = Integer.parseInt(MemSize.getText());
+       int cache_time = Integer.parseInt(CacheTime.getText());
+       int mem_time = Integer.parseInt(MemoryTime.getText());
+       
+       if(cache_block < 0 && cache_size < 0 && mem_size < 0 && cache_time < 0 && mem_time < 0){
+           return false;
+       } else {
+           return true;
+       }
+    }
+    
     private void generateValues(){
         String num; 
         String values = "";
@@ -438,57 +468,73 @@ public class Random extends javax.swing.JFrame {
     
     private void simulateLRU(){
        if(CacheBlock.getText().length() > 0 && CacheSize.getText().length() > 0 && MemSize.getText().length() > 0 && CacheTime.getText().length() > 0 ){
-        int cache_block = Integer.parseInt(CacheBlock.getText());
-        LRUCache = new Random_LRU(cache_block, this);
-        
-        String val = Values.getText();
-        String[] values = val.trim().split("\\s*,\\s*");
-        
-        simulation.append("CACHE SIMULATION: " + "\n");
-        simulation.append("Values: " + val + "\n");
-        
-        for (String a : values){
-            LRUCache.refer(a);
-        }
-        
-        //Hit rate
-        String hit = LRUCache.hit + "/" + values.length;
-        CacheHit.setText(hit);
-        float hit_rate = (float) LRUCache.hit/values.length;
-        
-        //Miss rate
-        String miss = LRUCache.miss + "/" + values.length;
-        CacheMiss.setText(miss);
-        float miss_rate = (float) LRUCache.miss/values.length;
-        
-        //Miss penalty (non-load thru)
-        int cache_access = Integer.parseInt(CacheTime.getText());
-        int memory_access = Integer.parseInt(MemoryTime.getText());
-        int cache_size = Integer.parseInt(CacheSize.getText());
-        int misspenalty = cache_access + cache_size*memory_access + cache_access;
-        String mp = Integer.toString(misspenalty);
-        MissPenalty.setText(mp);
-        
-        //Average access time
-        float average_access = ( (hit_rate*cache_access) + (miss_rate*misspenalty) );
-        String avg = Float.toString(average_access);
-        Average.setText(avg);
-        
-        //Total access time
-        int total_access = ( (LRUCache.hit*cache_size*cache_access) + ((cache_access+memory_access)*cache_size*LRUCache.miss) + (LRUCache.miss*cache_access) );
-        String total = Integer.toString(total_access);
-        Total.setText(total);
-        
-        //Cache Memory
-        Iterator<String> itr = LRUCache.result.iterator(); 
-        StringBuffer sb = new StringBuffer();
-        String temp;
-        while (itr.hasNext()){
-            temp = itr.next() + " ";
-            sb.append(temp);
-        }
-        String result = sb.toString();
-        Final.setText(result);
+           if(checkPositive() == true){
+                int cache_block = Integer.parseInt(CacheBlock.getText());
+                LRUCache = new Random_LRU(cache_block, this);
+                int cache_msize = Integer.parseInt(CacheSize.getText());
+                int main_msize = Integer.parseInt(MemSize.getText());
+
+                String val = Values.getText();
+                String[] values = val.trim().split("\\s*,\\s*");
+                
+                String c_type = (String) CType.getSelectedItem();   
+                if(c_type.equals("Word")){
+                     cache_msize = cache_msize / cache_block;
+                }
+                 
+                String m_type = (String) MType.getSelectedItem();   
+                if(m_type.equals("Word")){
+                     main_msize = main_msize / cache_block;
+                }
+
+                simulation.append("CACHE SIMULATION: " + "\n");
+                simulation.append("Values: " + val + "\n");
+
+                for (String a : values){
+                    LRUCache.refer(a);
+                }
+
+                //Hit rate
+                String hit = LRUCache.hit + "/" + values.length;
+                CacheHit.setText(hit);
+                float hit_rate = (float) LRUCache.hit/values.length;
+
+                //Miss rate
+                String miss = LRUCache.miss + "/" + values.length;
+                CacheMiss.setText(miss);
+                float miss_rate = (float) LRUCache.miss/values.length;
+
+                //Miss penalty (non-load thru)
+                int cache_access = Integer.parseInt(CacheTime.getText());
+                int memory_access = Integer.parseInt(MemoryTime.getText());
+                int cache_size = Integer.parseInt(CacheSize.getText());
+                int misspenalty = cache_access + cache_size*memory_access + cache_access;
+                String mp = Integer.toString(misspenalty);
+                MissPenalty.setText(mp);
+
+                //Average access time
+                float average_access = ( (hit_rate*cache_access) + (miss_rate*misspenalty) );
+                String avg = Float.toString(average_access);
+                Average.setText(avg);
+
+                //Total access time
+                int total_access = ( (LRUCache.hit*cache_size*cache_access) + ((cache_access+memory_access)*cache_size*LRUCache.miss) + (LRUCache.miss*cache_access) );
+                String total = Integer.toString(total_access);
+                Total.setText(total);
+
+                //Cache Memory
+                Iterator<String> itr = LRUCache.result.iterator(); 
+                StringBuffer sb = new StringBuffer();
+                String temp;
+                while (itr.hasNext()){
+                    temp = itr.next() + " ";
+                    sb.append(temp);
+                }
+                String result = sb.toString();
+                Final.setText(result);
+           } else{
+               JOptionPane.showMessageDialog(this, "Invalid values! Please input positive inputs only...", "Error", JOptionPane.ERROR_MESSAGE); 
+           }
         
        } else{
            JOptionPane.showMessageDialog(this, "Incomplete Form! Please complete to proceed...", "Error", JOptionPane.ERROR_MESSAGE);
@@ -534,6 +580,7 @@ public class Random extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.TextField Average;
+    private javax.swing.JComboBox<String> CType;
     private java.awt.TextField CacheBlock;
     private java.awt.TextField CacheHit;
     private java.awt.TextField CacheMiss;
@@ -541,6 +588,8 @@ public class Random extends javax.swing.JFrame {
     private java.awt.TextField CacheTime;
     private java.awt.TextField Final;
     private javax.swing.JButton Generate;
+    private javax.swing.JComboBox<String> MType;
+    private javax.swing.JComboBox<String> MType1;
     private java.awt.TextField MemSize;
     private java.awt.TextField MemoryTime;
     private javax.swing.JButton Menu;
@@ -550,8 +599,6 @@ public class Random extends javax.swing.JFrame {
     private java.awt.TextField Total;
     private java.awt.TextField Values;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
