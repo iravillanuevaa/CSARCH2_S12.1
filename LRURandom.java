@@ -75,10 +75,10 @@ public class LRURandom {
 	{
         Scanner scan = new Scanner(System.in);
         int block = 0;
-        
+
         System.out.print("How many values would the memory contain? ");
         int values = scan.nextInt();
-        System.out.println("Cache: [1] block [2] word");
+        System.out.print("Cache: [1] block [2] word ");
         int cache_choice = scan.nextInt();
         if(cache_choice == 1){
         System.out.print("Cache block? ");
@@ -123,7 +123,7 @@ public class LRURandom {
                 x++; /*x = exponent of block size*/
             }
             /*divide exponent of cache memory size  (word) / exponent of block size (word)*/
-            int expo = i/x;
+            int expo = i- x;
             System.out.println("Expo: " + expo);
             /*block = 2^expo*/
             block = (int) Math.pow(2,expo);
@@ -134,12 +134,10 @@ public class LRURandom {
          LRURandom cache = new LRURandom(block);
         
         //randomize values from user
-    
-        Random rand = new Random(); 
-        
+        Random rand = new Random();      
         System.out.println("Value generated: ");
         for (i = 0 ; i < values; i++){
-            int rand_int = rand.nextInt(100); 
+            int rand_int = rand.nextInt(200); 
             int repeat = rand.nextInt(3); 
             if(repeat == 1){
             cache.refer(rand_int);  
