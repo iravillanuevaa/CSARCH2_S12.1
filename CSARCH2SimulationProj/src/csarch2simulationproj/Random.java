@@ -1,10 +1,16 @@
 package csarch2simulationproj;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 import java.util.*;
+import javax.swing.JFileChooser;
 
 public class Random extends javax.swing.JFrame {
     
+    private String download_folder = "D:\\";
     Random_LRU LRUCache;
     
     /**
@@ -25,6 +31,7 @@ public class Random extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
+        chooser = new javax.swing.JFileChooser();
         label1 = new java.awt.Label();
         label2 = new java.awt.Label();
         BlockSize = new java.awt.TextField();
@@ -48,7 +55,7 @@ public class Random extends javax.swing.JFrame {
         label12 = new java.awt.Label();
         Final = new java.awt.TextField();
         CacheMiss = new java.awt.TextField();
-        jButton2 = new javax.swing.JButton();
+        saveTxt = new javax.swing.JButton();
         CType = new javax.swing.JComboBox<>();
         MType = new javax.swing.JComboBox<>();
         label13 = new java.awt.Label();
@@ -128,7 +135,12 @@ public class Random extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Save to .txt");
+        saveTxt.setText("Save to .txt");
+        saveTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveTxtActionPerformed(evt);
+            }
+        });
 
         CType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Block", "Word" }));
         CType.addActionListener(new java.awt.event.ActionListener() {
@@ -242,7 +254,7 @@ public class Random extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton2))
+                                        .addComponent(saveTxt))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(23, 23, 23)
@@ -284,7 +296,7 @@ public class Random extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2))
+                                    .addComponent(saveTxt))
                                 .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -416,7 +428,58 @@ public class Random extends javax.swing.JFrame {
         // TODO add your handling code here:
         generateValues();
     }//GEN-LAST:event_GenerateActionPerformed
+
+    private void saveTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTxtActionPerformed
+        // TODO add your handling code here:
+        openFolder();
+        String path = getDownloadFolder();
+        path = path.replace("\\", "\\\\");
+        String filename = "FullAssociativeLRU_Output.txt";
+        String file = path + filename;
         
+        try{
+            File log = new File(file);
+            
+            if (log.createNewFile()) {
+                System.out.println("File created: " + log.getName());
+                
+            } 
+        }
+        catch (IOException e){
+            System.out.println("An error occurred." + e);
+        }
+        
+        try{
+            PrintWriter pw = new PrintWriter(new FileWriter(file));
+            pw.println(simulation.getText());
+            pw.flush();
+            pw.close();
+        }
+        catch(IOException e){
+            System.out.println("An error occurred." + e);
+        }
+    }//GEN-LAST:event_saveTxtActionPerformed
+    
+    /**
+     * Get Download Folder
+     * @return
+    */
+    public String getDownloadFolder(){
+        return this.download_folder;
+    }
+    /**
+     * Open JFileChooser to set download folder of client
+     */
+    public void openFolder(){
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int open = chooser.showDialog(this, "Select Folder");
+        if(open == chooser.APPROVE_OPTION){
+            download_folder = chooser.getSelectedFile().toString()+"\\";
+        } else {
+            download_folder = "D:\\";
+        }
+    }
+    
     private boolean checkPositive(){
        int cache_block = Integer.parseInt(BlockSize.getText());
        int cache_size = Integer.parseInt(CacheSize.getText());
@@ -453,9 +516,6 @@ public class Random extends javax.swing.JFrame {
        if(BlockSize.getText().length() > 0 && CacheSize.getText().length() > 0 && MemSize.getText().length() > 0 && CacheTime.getText().length() > 0 ){
            if(checkPositive() == true){
                 int block_size = Integer.parseInt(BlockSize.getText());   
-//total access time and gagamitin sa pagdivide kay cache memory size kapag word siya
-
-
                 int cache_msize = Integer.parseInt(CacheSize.getText());
                 int main_msize = Integer.parseInt(MemSize.getText());
                 
@@ -514,43 +574,50 @@ public class Random extends javax.swing.JFrame {
                     LRUCache.refer(a);
                 }
 
-                //Hit rate
-                String hit = LRUCache.hit + "/" + values.length;
-                CacheHit.setText(hit);
-                float hit_rate = (float) LRUCache.hit/values.length;
+                simulation.append("\n\nOUTPUT: " + "\n\n");
+                 //Hit rate
+                 String hit = LRUCache.hit + "/" + values.length;
+                 CacheHit.setText(hit);
+                 float hit_rate = (float) LRUCache.hit/values.length;
+                 simulation.append("Hit Rate: " + hit + "\n");
 
-                //Miss rate
-                String miss = LRUCache.miss + "/" + values.length;
-                CacheMiss.setText(miss);
-                float miss_rate = (float) LRUCache.miss/values.length;
+                 //Miss rate
+                 String miss = LRUCache.miss + "/" + values.length;
+                 CacheMiss.setText(miss);
+                 float miss_rate = (float) LRUCache.miss/values.length;
+                 simulation.append("Miss Rate: " + miss + "\n");
 
-                //Miss penalty (non-load thru)
-                int cache_access = Integer.parseInt(CacheTime.getText());
-                int memory_access = Integer.parseInt(MemoryTime.getText());
-                int misspenalty = cache_access + block_size*memory_access + cache_access;
-                String mp = Integer.toString(misspenalty);
-                MissPenalty.setText(mp);
+                 //Miss penalty (non-load thru)
+                 int cache_access = Integer.parseInt(CacheTime.getText());
+                 int memory_access = Integer.parseInt(MemoryTime.getText());
+                 int misspenalty = cache_access + block_size*memory_access + cache_access;
+                 String mp = Integer.toString(misspenalty);
+                 MissPenalty.setText(mp);
+                 simulation.append("Miss Penalty: " + mp + "\n");
 
-                //Average access time
-                float average_access = ( (hit_rate*cache_access) + (miss_rate*misspenalty) );
-                String avg = Float.toString(average_access);
-                Average.setText(avg);
+                 //Average access time
+                 float average_access = ( (hit_rate*cache_access) + (miss_rate*misspenalty) );
+                 String avg = Float.toString(average_access);
+                 Average.setText(avg);
+                 simulation.append("Average Access Time: " + avg + "\n");
 
-                //Total access time
-                int total_access = ( (LRUCache.hit*block_size*cache_access) + ((cache_access+memory_access)*block_size*LRUCache.miss) + (LRUCache.miss*cache_access) );
-                String total = Integer.toString(total_access);
-                Total.setText(total);
+                 //Total access time
+                 int total_access = ( (LRUCache.hit*block_size*cache_access) + ((cache_access+memory_access)*block_size*LRUCache.miss) + (LRUCache.miss*cache_access) );
+                 String total = Integer.toString(total_access);
+                 Total.setText(total);
+                 simulation.append("Total Access Time: " + total + "\n");
 
-                //Cache Memory
-                Iterator<String> itr = LRUCache.result.iterator(); 
-                StringBuffer sb = new StringBuffer();
-                String temp;
-                while (itr.hasNext()){
-                    temp = itr.next() + " ";
-                    sb.append(temp);
-                }
-                String result = sb.toString();
-                Final.setText(result);
+                 //Cache Memory
+                 Iterator<String> itr = LRUCache.result.iterator(); 
+                 StringBuffer sb = new StringBuffer();
+                 String temp;
+                 while (itr.hasNext()){
+                     temp = itr.next() + " ";
+                     sb.append(temp);
+                 }
+                 String result = sb.toString();
+                 Final.setText(result);
+                 simulation.append("Final Cache: " + result);
            } else{
                JOptionPane.showMessageDialog(this, "Invalid values! Please input positive inputs only...", "Error", JOptionPane.ERROR_MESSAGE); 
            }
@@ -616,7 +683,7 @@ public class Random extends javax.swing.JFrame {
     private javax.swing.JButton Simulate;
     private java.awt.TextField Total;
     private java.awt.TextField Values;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JFileChooser chooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -636,6 +703,7 @@ public class Random extends javax.swing.JFrame {
     private java.awt.Label label7;
     private java.awt.Label label8;
     private java.awt.Label label9;
+    private javax.swing.JButton saveTxt;
     public javax.swing.JTextArea simulation;
     // End of variables declaration//GEN-END:variables
 }
