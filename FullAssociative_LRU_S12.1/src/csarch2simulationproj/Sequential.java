@@ -8,10 +8,13 @@ import javax.swing.JOptionPane;
 import java.util.*;
 import javax.swing.JFileChooser;
 
+//
+import java.lang.Math;
+
 public class Sequential extends javax.swing.JFrame {
     
     private String download_folder = "D:\\";
-    Simpleton_LRU LRUCache;
+    Sequential_LRU LRUCache;
     
     /**
      * Creates new form CSARCH2_S12_1
@@ -475,8 +478,10 @@ public class Sequential extends javax.swing.JFrame {
        int mem_size = Integer.parseInt(MemSize.getText());
        int cache_time = Integer.parseInt(CacheTime.getText());
        int mem_time = Integer.parseInt(MemoryTime.getText());
+       int val = Integer.parseInt(Values.getText());
+       int times = Integer.parseInt(Values1.getText());
        
-       if(cache_block < 0 && cache_size < 0 && mem_size < 0 && cache_time < 0 && mem_time < 0){
+       if(cache_block < 0 && cache_size < 0 && mem_size < 0 && cache_time < 0 && mem_time < 0 && val < 0 && times < 0){
            return false;
        } else {
            return true;
@@ -484,12 +489,192 @@ public class Sequential extends javax.swing.JFrame {
     }
     
     private void simulateLRU(){
-        if(BlockSize.getText().length() > 0 && CacheSize.getText().length() > 0 && MemSize.getText().length() > 0 && CacheTime.getText().length() > 0 ){
+        if(BlockSize.getText().length() > 0 && CacheSize.getText().length() > 0 && MemSize.getText().length() > 0 && CacheTime.getText().length() > 0 && Values.getText().length() > 0 && Values1.getText().length() > 0 ){
             if(checkPositive() == true){
                  int block_size = Integer.parseInt(BlockSize.getText());
                  int cache_msize = Integer.parseInt(CacheSize.getText());
                  int main_msize = Integer.parseInt(MemSize.getText());
+                 int values = Integer.parseInt(Values.getText());
+                 int repeat = Integer.parseInt(Values1.getText());
                  
+                 //addition starts here
+                 int block = 0;
+                 LRUCache = new Sequential_LRU(cache_msize, this);
+                 //String[] data = new String[100];
+                 
+                 String c_type = (String) CType.getSelectedItem();   
+                 if(c_type.equals("Word")){
+                     /*Convert cache word to block*/
+                    int flag = 0;
+                    int temp = 0;
+                    int i = 1;
+                    
+                        while (flag == 0){
+                            temp = (int) Math.pow(2, i);
+                            System.out.println("Temp: " + temp);
+                            if(temp >= cache_msize) {
+                                flag = 1;
+                            }
+                            i++;
+                        }
+                        /*i = exponent of cache memory word*/
+                        i--;
+                        System.out.println("i: " + i);
+                        int x = 1; 
+                        flag = 0;
+                        temp = 0;
+                        while (flag == 0){
+                            temp = (int) Math.pow(2, i);
+                            if(temp >= block_size) {
+                                flag = 1;
+                            }
+                            x++; /*x = exponent of block size*/
+                        }
+                        x--;
+                    /*divide exponent of cache memory size  (word) / exponent of block size (word)*/
+                    int expo = i-x;
+                    System.out.println("Expo: " + expo);
+                    /*block = 2^expo*/
+                    block = (int) Math.pow(2,expo);
+                    
+                    System.out.println("Block: " + cache_msize);
+                 }
+                 /*
+                 
+                 System.out.print("Cache: [1] block [2] word ");
+                 int cache_choice = scan.nextInt();
+                 if (cache_choice == 1) {
+                     System.out.print("Cache block? ");
+                     block = scan.nextInt();
+                 } else {
+                     System.out.print("Cache word? ");
+                     cache_word = scan.nextInt();
+                 }
+                 System.out.print("Block size(word/s)? ");
+                 int word = scan.nextInt();
+                 System.out.print("Cache access time (ns)? ");
+                 int cache_access = scan.nextInt();
+                 System.out.print("Memory access time (ns)? ");
+                 int memory_access = scan.nextInt();
+                 */
+                 /* Convert cache word to block */
+                 /*
+                 int flag = 0;
+                 int temp = 0;
+                 int i = 1;
+                 /* while 2^i is not equal or greater than cache_word *//*
+                 if (cache_choice == 2) {
+                     while (flag == 0) {
+                         temp = (int) Math.pow(2, i);
+                         
+                         if (temp >= cache_word) {
+                             flag = 1;
+                         }
+                         i++;
+                     }
+                     /* i = exponent of cache memory word *//*
+                     i--;
+                     //System.out.println("i: " + i);
+                     int x = 1;
+                     flag = 0;
+                     int temp2 = 0;
+                     while (flag == 0) {
+                         temp2 = (int) Math.pow(2, x);
+                         //System.out.println("Temp: " + temp2);
+                         if (temp2 >= word) {
+                             flag = 1;
+                         }
+                         x++; /* x = exponent of block size *//*
+                     }
+                     x--;
+                     //System.out.println("x: " + x);
+                     /*
+                      * divide exponent of cache memory size (word) / exponent of block size (word)
+                      *//*
+                     int expo = i - x;
+                     //System.out.println("Expo: " + expo);
+                     /* block = 2^expo *//*
+                     block = (int) Math.pow(2, expo);
+                 }
+                 */
+                 //int num_block = values / word;
+         
+                 float var = (float) values / block_size;
+                 int num_block =  (int) Math.ceil(var);
+                 //System.out.println("Num block: " + num_block);
+                 /*
+                 int start = -1;
+                 for (int y = 0; y < num_block; y++) {
+                     start = start + 1; // 0, 5
+                     String temp1 = Integer.toString(start); // 0,5
+                     start = start + word - 1; // 4
+                     if(start > values){
+                         start = values;
+                     }
+                     String temp2 = Integer.toString(start); // 4
+                     data[y] = temp1 + "-" + temp2; // 0 - 4
+                 }
+                 */
+         
+         
+                 // Initialize cache
+         
+                 // randomize values from user
+                 simulation.append("CACHE SIMULATION: " + "\n");
+                 for (int x = 0 ; x < repeat ; x ++){
+                 for (int i = 0; i < num_block; i++) {
+                     LRUCache.refer(i);
+                  }
+                 }
+                 //addition AGAIN
+                 simulation.append("OUTPUT: " + "\n\n");
+                 //Hit rate
+                 String hit = LRUCache.hit + "/" + num_block;
+                 CacheHit.setText(hit);
+                 float hit_rate = (float) LRUCache.hit/ num_block;
+                 simulation.append("Hit Rate: " + hit + "\n");
+
+                 //Miss rate
+                 String miss = LRUCache.miss + "/" +  num_block;
+                 CacheMiss.setText(miss);
+                 float miss_rate = (float) LRUCache.miss/ num_block;
+                 simulation.append("Miss Rate: " + miss + "\n");
+
+                 //Miss penalty (non-load thru)
+                 int cache_access = Integer.parseInt(CacheTime.getText());
+                 int memory_access = Integer.parseInt(MemoryTime.getText());
+                 int misspenalty = cache_access + block_size*memory_access + cache_access;
+                 String mp = Integer.toString(misspenalty);
+                 MissPenalty.setText(mp);
+                 simulation.append("Miss Penalty: " + mp + "\n");
+
+                 //Average access time
+                 float average_access = ( (hit_rate*cache_access) + (miss_rate*misspenalty) );
+                 String avg = Float.toString(average_access);
+                 Average.setText(avg);
+                 simulation.append("Average Access Time: " + avg + "\n");
+
+                 //Total access time
+                 int total_access = ( (LRUCache.hit*block_size*cache_access) + ((cache_access+memory_access)*block_size*LRUCache.miss) + (LRUCache.miss*cache_access) );
+                 String total = Integer.toString(total_access);
+                 Total.setText(total);
+                 simulation.append("Total Access Time: " + total + "\n");
+
+                 //Cache Memory
+                 Iterator<String> itr = LRUCache.result.iterator(); 
+                 StringBuffer sb = new StringBuffer();
+                 String temp;
+                 while (itr.hasNext()){
+                     temp = itr.next() + " ";
+                     sb.append(temp);
+                 }
+                 String result = sb.toString();
+                 Final.setText(result);
+                 simulation.append("Final Cache: " + result);
+                
+         
+                 
+                 //addition ends
             } else{
                  JOptionPane.showMessageDialog(this, "Invalid values! Please input positive inputs only...", "Error", JOptionPane.ERROR_MESSAGE); 
             }
