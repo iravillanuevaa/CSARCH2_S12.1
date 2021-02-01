@@ -515,7 +515,7 @@ public class Simpleton extends javax.swing.JFrame {
                             x++; /*x = exponent of block size*/
                         }
                     /*divide exponent of cache memory size  (word) / exponent of block size (word)*/
-                    int expo = i/x;
+                    int expo = i-x;
                     System.out.println("Expo: " + expo);
                     /*block = 2^expo*/
                     cache_msize = (int) Math.pow(2,expo);
