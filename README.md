@@ -73,5 +73,17 @@ In this page, instead of the main memory sequence values being randomly generate
 Similar to the first two pages, there are still three (3) buttons that the user can interact with.
 
 ### E. Output
+![output](https://i.imgur.com/Q0rkNxW.png)
 
-## Sample Simulations
+The output panel for all input types of cache mapping are the same. Once all the required fields have been filled up and simulation is performed, the corresponding data will be displayed based on the calculations performed by the simulation:
+
+1. **Cache Hit**: Hit rate. Ratio of how many successful memory access in the cache memory.
+2. **Cache Miss**: Miss rate. Ratio of how many unsuccessful memory access in the cache memory.
+3. **Miss Penalty**: Extra time required to bring the data into cache from the main memory whenever there is a “miss” in cache.
+4. **Average Access Time**: Average memory access time computed by the simulation.
+5. **Total Memory Access Time**: Total memory access time of the cache computed by the simulation.
+6. **Final Cache Memory**: List of the final cache memory after the simulation of cache mapping is performed.
+7. **Cache Simulation**: Step-by-step simulation of the cache accessing.
+
+### F. Save Output to a Text (.txt) File
+![savetxt](https://i.imgur.com/DCt98NC.png)
