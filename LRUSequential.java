@@ -141,7 +141,10 @@ public class LRUSequential {
             /* block = 2^expo */
             block = (int) Math.pow(2, expo);
         }
-        int num_block = values / word;
+        //int num_block = values / word;
+
+        float var = (float) values / word;
+        int num_block =  (int) Math.ceil(var);
         //System.out.println("Num block: " + num_block);
 
         int start = -1;
@@ -149,6 +152,9 @@ public class LRUSequential {
             start = start + 1; // 0, 5
             String temp1 = Integer.toString(start); // 0,5
             start = start + word - 1; // 4
+            if(start > values){
+                start = values;
+            }
             String temp2 = Integer.toString(start); // 4
             data[y] = temp1 + "-" + temp2; // 0 - 4
         }
@@ -195,6 +201,7 @@ public class LRUSequential {
         for (int x = 0; x < block; x++) {
             System.out.println("Block value " + index[x] + ": " + data[index[x]]);
         }
+        
 	 }
 
 }
