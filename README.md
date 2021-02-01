@@ -87,3 +87,5 @@ The output panel for all input types of cache mapping are the same. Once all the
 
 ### F. Save Output to a Text (.txt) File
 ![savetxt](https://i.imgur.com/DCt98NC.png)
+
+The user has the option to save the results of the simulation in a text (.txt) file by click the **Save to .txt** button found on the upper-right corner of the output panel. This allows the user to view the cache simulation and the computed outputs acquired after the simulation.
